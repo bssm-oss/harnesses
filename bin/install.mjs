@@ -1,6 +1,14 @@
 #!/usr/bin/env node
 
-import { existsSync, mkdirSync, cpSync, readdirSync, statSync } from 'node:fs';
+import {
+  existsSync,
+  mkdirSync,
+  cpSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+  statSync,
+} from 'node:fs';
 import { join, dirname, basename } from 'node:path';
 import { homedir } from 'node:os';
 import { fileURLToPath } from 'node:url';
@@ -8,16 +16,61 @@ import { createInterface } from 'node:readline';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PLUGINS_DIR = join(__dirname, '..', 'plugins');
-const CLAUDE_HOME = join(homedir(), '.claude');
 
-function ask(question) {
-  const rl = createInterface({ input: process.stdin, output: process.stdout });
-  return new Promise((resolve) => {
-    rl.question(question, (answer) => {
-      rl.close();
-      resolve(answer.trim().toLowerCase());
-    });
-  });
+const TARGETS = {
+  claude: {
+    name: 'Claude Code',
+    home: join(homedir(), '.claude'),
+    agentsDir: 'agents',
+    skillsDir: 'skills',
+    skillFormat: 'flat', // SKILL.md -> <name>.md
+    transformAgent: null,
+  },
+  opencode: {
+    name: 'OpenCode',
+    home: join(homedir(), '.config', 'opencode'),
+    agentsDir: 'agents',
+    skillsDir: 'skills',
+    skillFormat: 'folder', // keep SKILL.md in folder
+    transformAgent: transformForOpenCode,
+  },
+};
+
+const MODEL_MAP = {
+  opus: 'anthropic/claude-opus-4-6',
+  sonnet: 'anthropic/claude-sonnet-4-6',
+  haiku: 'anthropic/claude-haiku-4-5-20251001',
+};
+
+function transformForOpenCode(content) {
+  // Add mode: subagent if not present
+  if (/^---\s*$/m.test(content)) {
+    // Has frontmatter — transform model names and add mode
+    let transformed = content;
+
+    // Convert model short names to provider/model format
+    for (const [short, full] of Object.entries(MODEL_MAP)) {
+      transformed = transformed.replace(
+        new RegExp(`^(model:\\s*)${short}\\s*$`, 'm'),
+        `$1${full}`
+      );
+    }
+
+    // Add mode: subagent after description if not present
+    if (!/^mode:/m.test(transformed)) {
+      transformed = transformed.replace(
+        /^(description:.*$)/m,
+        '$1\nmode: subagent'
+      );
+    }
+
+    return transformed;
+  }
+
+  // No frontmatter — wrap with minimal OpenCode frontmatter
+  const firstLine = content.split('\n').find((l) => l.trim().length > 0) || 'Agent';
+  const desc = firstLine.replace(/^#+\s*/, '').slice(0, 100);
+  return `---\ndescription: "${desc}"\nmode: subagent\n---\n\n${content}`;
 }
 
 function collectFiles(src, dest, list = []) {
@@ -37,12 +90,13 @@ function collectFiles(src, dest, list = []) {
 
 function printHelp() {
   console.log(`
-  claude-code-harness — install multi-agent harness to ~/.claude/
+  harness-for-yall — install multi-agent harness
 
   Usage:
-    npx claude-code-harness [options] [plugins...]
+    npx harness-for-yall [options] [plugins...]
 
   Options:
+    --target <t>    Target: claude (default) or opencode
     --force, -f     Overwrite existing files
     --dry-run       Preview without copying
     --help, -h      Show this help
@@ -55,10 +109,10 @@ function printHelp() {
     explore-team    Codebase exploration (4 agents, 3 skills)
 
   Examples:
-    npx claude-code-harness                 # Install all plugins
-    npx claude-code-harness fe-experts      # Install only frontend
-    npx claude-code-harness fe-experts be-experts  # Install FE + BE
-    npx claude-code-harness --dry-run       # Preview all
+    npx harness-for-yall                          # All plugins → Claude Code
+    npx harness-for-yall --target opencode        # All plugins → OpenCode
+    npx harness-for-yall fe-experts be-experts    # Specific plugins
+    npx harness-for-yall --dry-run                # Preview
 `);
 }
 
@@ -68,13 +122,27 @@ async function main() {
   const dryRun = args.includes('--dry-run');
   const help = args.includes('--help') || args.includes('-h');
 
+  // Parse --target
+  const targetIdx = args.indexOf('--target');
+  const targetName = targetIdx !== -1 ? args[targetIdx + 1] : 'claude';
+  const target = TARGETS[targetName];
+
+  if (!target) {
+    console.log(`  unknown target: ${targetName} (available: claude, opencode)`);
+    process.exit(1);
+  }
+
   if (help) {
     printHelp();
     process.exit(0);
   }
 
-  const flags = ['--force', '-f', '--dry-run', '--help', '-h'];
-  const requestedPlugins = args.filter((a) => !flags.includes(a));
+  const flags = ['--force', '-f', '--dry-run', '--help', '-h', '--target'];
+  const requestedPlugins = args.filter((a, i) => {
+    if (flags.includes(a)) return false;
+    if (i > 0 && args[i - 1] === '--target') return false;
+    return true;
+  });
 
   const allPlugins = readdirSync(PLUGINS_DIR, { withFileTypes: true })
     .filter((d) => d.isDirectory())
@@ -96,8 +164,10 @@ async function main() {
     process.exit(1);
   }
 
-  console.log('\n  Claude Code Harness Installer\n');
-  console.log(`  Target: ${CLAUDE_HOME}`);
+  const targetHome = target.home;
+
+  console.log(`\n  harness-for-yall installer\n`);
+  console.log(`  Target: ${target.name} (${targetHome})`);
   console.log(`  Plugins: ${plugins.join(', ')}`);
   console.log(`  Mode: ${dryRun ? 'dry-run' : force ? 'force' : 'safe (skip existing)'}\n`);
 
@@ -107,13 +177,17 @@ async function main() {
   for (const plugin of plugins) {
     const pluginDir = join(PLUGINS_DIR, plugin);
 
-    // agents/ -> ~/.claude/agents/
+    // agents/
     const agentsDir = join(pluginDir, 'agents');
     if (existsSync(agentsDir)) {
-      operations.push(...collectFiles(agentsDir, join(CLAUDE_HOME, 'agents')));
+      const agentFiles = collectFiles(agentsDir, join(targetHome, target.agentsDir));
+      for (const op of agentFiles) {
+        op.transform = target.transformAgent;
+      }
+      operations.push(...agentFiles);
     }
 
-    // skills/<name>/SKILL.md -> ~/.claude/skills/<name>.md (flatten)
+    // skills/
     const skillsDir = join(pluginDir, 'skills');
     if (existsSync(skillsDir)) {
       const skillFolders = readdirSync(skillsDir, { withFileTypes: true }).filter((d) =>
@@ -121,22 +195,32 @@ async function main() {
       );
       for (const folder of skillFolders) {
         const skillFile = join(skillsDir, folder.name, 'SKILL.md');
-        if (existsSync(skillFile)) {
+        if (!existsSync(skillFile)) continue;
+
+        if (target.skillFormat === 'flat') {
+          // Claude Code: SKILL.md -> <name>.md
           operations.push({
             src: skillFile,
-            dest: join(CLAUDE_HOME, 'skills', `${folder.name}.md`),
+            dest: join(targetHome, target.skillsDir, `${folder.name}.md`),
+          });
+        } else {
+          // OpenCode: keep folder structure
+          operations.push({
+            src: skillFile,
+            dest: join(targetHome, target.skillsDir, folder.name, 'SKILL.md'),
           });
         }
       }
     }
 
-    // harness docs (*.md at plugin root, excluding .claude-plugin/)
-    const rootMds = readdirSync(pluginDir)
-      .filter((f) => f.endsWith('.md') && statSync(join(pluginDir, f)).isFile());
+    // harness docs (*.md at plugin root)
+    const rootMds = readdirSync(pluginDir).filter(
+      (f) => f.endsWith('.md') && statSync(join(pluginDir, f)).isFile()
+    );
     for (const md of rootMds) {
       operations.push({
         src: join(pluginDir, md),
-        dest: join(CLAUDE_HOME, 'harnesses', md),
+        dest: join(targetHome, 'harnesses', md),
       });
     }
   }
@@ -146,7 +230,7 @@ async function main() {
   let skipped = 0;
 
   for (const op of operations) {
-    const rel = op.dest.replace(CLAUDE_HOME + '/', '');
+    const rel = op.dest.replace(targetHome + '/', '');
     if (dryRun) {
       console.log(`  [dry-run] ${rel}`);
       copied++;
@@ -159,7 +243,12 @@ async function main() {
       console.log(`  skip: ${rel}`);
       skipped++;
     } else {
-      cpSync(op.src, op.dest);
+      if (op.transform) {
+        const content = readFileSync(op.src, 'utf-8');
+        writeFileSync(op.dest, op.transform(content));
+      } else {
+        cpSync(op.src, op.dest);
+      }
       console.log(`  copy: ${rel}`);
       copied++;
     }
