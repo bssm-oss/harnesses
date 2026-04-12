@@ -17,6 +17,7 @@ A pre-configured set of Claude Code agents organized into 5 specialized teams. E
 | `fe-experts` | Expert Pool | 5 | 5 | Frontend: architect → implementer / styler → perf + tester |
 | `be-experts` | Pipeline + Expert Pool | 7 | 5 | Backend: architect → impl + validator → resilience / provider / security → tester |
 | `explore-team` | Hierarchical Delegation | 4 | 3 | Codebase exploration: scout(opus) → hypothesizer → evidence → synthesizer |
+| `ops-kit` | Skills + Hook | 0 | 2 | Release pipeline (`/release`) + CI auto-fix (`/ci-watch`) + push hook + CLAUDE.md rules |
 
 ## Install
 

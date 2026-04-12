@@ -48,6 +48,14 @@
       "version": "1.1.0",
       "keywords": ["explore", "investigate", "architecture", "analysis"],
       "category": "analysis"
+    },
+    {
+      "name": "ops-kit",
+      "source": "./plugins/ops-kit",
+      "description": "Release pipeline, CI auto-fix watcher, operational CLAUDE.md rules, and push hooks",
+      "version": "1.0.0",
+      "keywords": ["release", "ci", "ops", "hooks", "pipeline", "publish"],
+      "category": "operations"
     }
   ]
 }

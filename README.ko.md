@@ -17,6 +17,7 @@ Claude Code 에이전트를 5개 전문 팀으로 조직한 사전 설정 패키
 | `fe-experts` | Expert Pool | 5 | 5 | 프론트엔드: 아키텍트 → 구현/스타일 → 성능 + 테스트 |
 | `be-experts` | Pipeline + Expert Pool | 7 | 5 | 백엔드: 아키텍트 → 구현+검증 → 회복성/프로바이더/보안 → 테스트 |
 | `explore-team` | Hierarchical Delegation | 4 | 3 | 코드베이스 탐색: 스카우트(opus) → 가설 → 증거 → 종합 |
+| `ops-kit` | Skills + Hook | 0 | 2 | 릴리즈 파이프라인(`/release`) + CI 자동 수정(`/ci-watch`) + push 훅 + CLAUDE.md 규칙 |
 
 ## 설치
 
