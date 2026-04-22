@@ -1,6 +1,6 @@
 # Creating Your Own Team
 
-claude-harness-kit is designed to be extended. This guide walks you through creating a custom team plugin.
+harness-kit is designed to be extended. This guide walks you through creating a custom team plugin.
 
 ## Directory Structure
 
@@ -119,8 +119,8 @@ Add your team to `.claude-plugin/marketplace.json`:
 ## Step 7: Test
 
 ```bash
-npx claude-harness-kit your-team --dry-run
-npx claude-harness-kit your-team --force
+npx harness-kit your-team --dry-run
+npx harness-kit your-team --force
 ```
 
 ## Contributing

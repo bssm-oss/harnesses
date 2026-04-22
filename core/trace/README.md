@@ -1,6 +1,6 @@
 # Agent Trace Logging
 
-Optional observability for claude-harness-kit agent sessions.
+Optional observability for harness-kit agent sessions.
 
 ## Quick start
 

@@ -1,12 +1,12 @@
 # Agent Trace Logging
 
-claude-harness-kit supports optional trace logging for observability.
+harness-kit supports optional trace logging for observability.
 
 ## Enabling
 
 ```bash
 # Via environment variable
-HARNESS_TRACE=1 npx claude-harness-kit
+HARNESS_TRACE=1 npx harness-kit
 
 # Via agent frontmatter (per-agent)
 ---

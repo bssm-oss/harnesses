@@ -35,10 +35,10 @@ function collectFiles(src, dest, list = []) {
 
 function printHelp() {
   console.log(`
-  claude-harness-kit — install multi-agent harness to ~/.claude/
+  harness-kit — install multi-agent harness to ~/.claude/
 
   Usage:
-    npx claude-harness-kit [options] [teams...]
+    npx harness-kit [options] [teams...]
 
   Options:
     --uninstall       Remove installed files
@@ -58,11 +58,11 @@ function printHelp() {
     ops-team        Release, CI watch, zombie-collector (0 agents, 3 skills)
 
   Examples:
-    npx claude-harness-kit                        # All teams (no hooks)
-    npx claude-harness-kit fe-team be-team        # Specific teams
-    npx claude-harness-kit --install-hooks        # All teams + shell hooks
-    npx claude-harness-kit --dry-run              # Preview
-    npx claude-harness-kit --force                # Overwrite existing
+    npx harness-kit                        # All teams (no hooks)
+    npx harness-kit fe-team be-team        # Specific teams
+    npx harness-kit --install-hooks        # All teams + shell hooks
+    npx harness-kit --dry-run              # Preview
+    npx harness-kit --force                # Overwrite existing
 `);
 }
 
@@ -103,7 +103,7 @@ async function main() {
   }
 
   const mode = uninstall ? 'uninstall' : dryRun ? 'dry-run' : force ? 'force' : 'safe (skip existing)';
-  console.log(`\n  claude-harness-kit ${uninstall ? 'uninstaller' : 'installer'}\n`);
+  console.log(`\n  harness-kit ${uninstall ? 'uninstaller' : 'installer'}\n`);
   console.log(`  Target: ${CLAUDE_HOME}`);
   console.log(`  Teams: ${plugins.join(', ')}`);
   console.log(`  Mode: ${mode}`);

@@ -1,6 +1,6 @@
-# claude-harness-kit
+# harness-kit
 
-[![npm](https://img.shields.io/npm/v/claude-harness-kit)](https://www.npmjs.com/package/claude-harness-kit)
+[![npm](https://img.shields.io/npm/v/harness-kit)](https://www.npmjs.com/package/harness-kit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Community harness kit for Claude Code — multi-agent orchestration with 7 patterns and 8 specialist teams.
@@ -10,11 +10,11 @@ Community harness kit for Claude Code — multi-agent orchestration with 7 patte
 ## Install
 
 ```bash
-npm install -g claude-harness-kit
-claude-harness-kit
+npm install -g harness-kit
+harness-kit
 ```
 
-> **Note:** `npx claude-harness-kit` does not work on npm 10+ due to changed binary resolution. Use global install.
+> **Note:** `npx harness-kit` does not work on npm 10+ due to changed binary resolution. Use global install.
 
 After installation, agents and skills are available in `~/.claude/agents/` and `~/.claude/skills/`.
 
@@ -99,7 +99,7 @@ See [`examples/`](examples/) for 5 real-world walkthroughs:
 ## Uninstall
 
 ```bash
-claude-harness-kit --uninstall
+harness-kit --uninstall
 ```
 
 ## Creating custom teams

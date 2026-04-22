@@ -1,6 +1,6 @@
 # Orchestration Patterns
 
-claude-harness-kit implements 7 main patterns and 4 cross-cutting patterns.
+harness-kit implements 7 main patterns and 4 cross-cutting patterns.
 
 ---
 

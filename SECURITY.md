@@ -15,7 +15,7 @@ Only the **latest published version** on npm receives security fixes.
 
 Use GitHub's Private Vulnerability Reporting:
 
-> [https://github.com/bssm-oss/claude-harness-kit/security/advisories/new](https://github.com/bssm-oss/claude-harness-kit/security/advisories/new)
+> [https://github.com/bssm-oss/harness-kit/security/advisories/new](https://github.com/bssm-oss/harness-kit/security/advisories/new)
 
 Your report will only be visible to the maintainers until it is resolved and a fix is published.
 

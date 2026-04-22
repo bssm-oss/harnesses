@@ -1,10 +1,10 @@
 {
-  "name": "claude-harness-kit",
+  "name": "harness-kit",
   "version": "1.0.0",
   "description": "Community harness kit for Claude Code — multi-agent orchestration with 7 patterns, 8 teams, built-in operations tooling",
   "type": "module",
   "bin": {
-    "claude-harness-kit": "bin/install.mjs"
+    "harness-kit": "bin/install.mjs"
   },
   "files": [
     "bin/",
@@ -33,7 +33,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bssm-oss/claude-harness-kit"
+    "url": "https://github.com/bssm-oss/harness-kit"
   },
   "author": "justn-hyeok",
   "license": "MIT",

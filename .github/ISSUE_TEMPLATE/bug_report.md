@@ -15,4 +15,4 @@ labels: bug
 **Environment:**
 - OS:
 - Node version:
-- claude-harness-kit version:
+- harness-kit version:
