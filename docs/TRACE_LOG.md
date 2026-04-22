@@ -1,12 +1,12 @@
 # Agent Trace Logging
 
-harness-kit supports optional trace logging for observability.
+harnesses supports optional trace logging for observability.
 
 ## Enabling
 
 ```bash
 # Via environment variable
-HARNESS_TRACE=1 npx harness-kit
+HARNESS_TRACE=1 npx harnesses
 
 # Via agent frontmatter (per-agent)
 ---

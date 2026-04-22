@@ -1,4 +1,4 @@
-# Contributing to harness-kit
+# Contributing to harnesses
 
 Thank you for your interest in contributing! This guide explains how to add new teams, agents, and skills to the kit.
 
@@ -113,8 +113,8 @@ Body: what the skill does, step by step.
 
 ```bash
 # 1. Clone and install dependencies
-git clone https://github.com/bssm-oss/harness-kit.git
-cd harness-kit
+git clone https://github.com/bssm-oss/harnesses.git
+cd harnesses
 npm install
 
 # 2. Install the CLI globally (links to your local copy)
@@ -124,7 +124,7 @@ npm install -g .
 npm install -g .
 
 # 4. Verify the install
-harness-kit --help
+harnesses --help
 ```
 
 The installer copies `plugins/` into `~/.claude/`. After reinstalling, changes are live in any new Claude Code session.
@@ -157,7 +157,7 @@ docs: add be-team harness entry-point example
 
 Before opening a pull request, confirm:
 
-- [ ] `npm install -g . && harness-kit --help` exits without error
+- [ ] `npm install -g . && harnesses --help` exits without error
 - [ ] New agents have required frontmatter (`name`, `description`)
 - [ ] New skills have required frontmatter (`name`, `description`)
 - [ ] `plugin.json` lists all new agents and skills

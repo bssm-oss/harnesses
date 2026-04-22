@@ -1,6 +1,6 @@
 # Agent Trace Logging
 
-Optional observability for harness-kit agent sessions.
+Optional observability for harnesses agent sessions.
 
 ## Quick start
 

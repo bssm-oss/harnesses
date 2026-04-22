@@ -63,7 +63,7 @@ Complete redesign from harness-for-yall v0.x.
 
 ### Renamed
 
-- Package: `harness-for-yall` → `harness-kit`
+- Package: `harness-for-yall` → `harnesses`
 - All plugin directories renamed to `<name>-team` convention:
   - `dev-pipeline` → `dev-team`
   - `review-pipeline` → `review-team`
@@ -107,5 +107,5 @@ Complete redesign from harness-for-yall v0.x.
 
 ### Migration from v0.x
 
-Run `npx harness-kit --force` to overwrite old installation.
+Run `npx harnesses --force` to overwrite old installation.
 Directory names changed — old `*-pipeline`/`*-experts`/`*-kit` names are gone.
