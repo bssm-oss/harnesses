@@ -7,7 +7,5 @@ review-report.sarif.json
 
 # Python
 codex/.venv/
-codex/__pycache__/
-codex/src/**/__pycache__/
-codex/*.egg-info/
-codex/src/*.egg-info/
+codex/**/__pycache__/
+codex/**/*.egg-info/
