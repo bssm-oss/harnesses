@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.0.3] - 2026-04-23
+
+### Fixed
+- Package Codex debate agent TOML files into the Python wheel so installed `codex-harnesses` can run outside the source tree.
+- Keep npm package contents clean by excluding local Python caches, virtual environments, and generated archives.
+
+### Changed
+- Split the repository into explicit `core/`, `codex/`, and `claudecode/` layers.
+- Move Claude Code team plugins from `plugins/` to `claudecode/plugins/`.
+- Remove legacy helper entrypoints; `bin/install.mjs` is now the single installer/uninstaller path.
+- Clarify Codex documentation and metadata around the currently shipped debate pipeline.
+- Expand CI to run installer smoke tests and Codex Python tests.
+
+### Added
+- Node smoke tests for Claude Code install/uninstall behavior, including opt-in hook cleanup.
+
+---
+
 ## [1.0.2] - 2026-04-22
 
 ### Added
