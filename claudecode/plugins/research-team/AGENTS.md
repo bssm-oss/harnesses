@@ -9,7 +9,7 @@ Long-running web and document research using the Blackboard pattern.
 
 ## Pattern
 
-**Blackboard** — Agents share state via files. See [docs/PATTERNS.md](../../docs/PATTERNS.md) and [core/blackboard/README.md](../../core/blackboard/README.md).
+**Blackboard** — Agents share state via files. See [docs/PATTERNS.md](../../../docs/PATTERNS.md) and [core/blackboard/README.md](../../../core/blackboard/README.md).
 
 ## Agents
 

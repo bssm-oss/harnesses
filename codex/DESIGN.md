@@ -29,7 +29,7 @@ o3 as planner is reserved for research-team where crawl strategy must adapt dyna
 ## Package layout
 
 ```
-codex/                         # sibling to plugins/ in this repo
+codex/                         # Codex layer, sibling to claudecode/ and core/
 ├── pyproject.toml             # pip install codex-harnesses
 ├── src/
 │   └── codex_harnesses/
@@ -215,8 +215,14 @@ No `openai-agents` dependency — pure stdlib + typer + rich.
 
 ---
 
-## Open questions before implementation
+## Current boundaries
 
-1. **Agent TOML loading path**: load from `codex/agents/<team>/` relative to package install, or from `~/.codex/harnesses/<team>/`? The former is simpler for now.
-2. **Output file**: save verdict as `debate-{slug}.md` in cwd, or print-only? Print-only first; add `--output` flag later.
-3. **Future teams**: research-team needs `asyncio.gather` for parallel crawlers + a state file (Blackboard). That's the natural next step after debate-team works.
+The repository is split into three top-level product layers:
+
+- `core/`: shared pattern specs and schemas.
+- `claudecode/plugins/`: Claude Code teams, agents, skills, hooks, and harness docs.
+- `codex/`: executable Python orchestration for Codex CLI.
+
+Codex currently ships the debate pipeline. Future Codex teams should live under
+`codex/src/codex_harnesses/teams/` and reuse the shared pattern language from
+`core/` rather than importing Claude Code prompt files directly.

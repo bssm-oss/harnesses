@@ -68,6 +68,16 @@ Cross-cutting: Reflection Loop, Circuit Breaker, Escalation, Consensus Voting.
 
 See [`docs/PATTERNS.md`](docs/PATTERNS.md) for full details.
 
+## Repository layers
+
+| Layer | Path | Purpose |
+|-------|------|---------|
+| Core | `core/` | Shared orchestration pattern specs, blackboard schema, and trace schema |
+| Claude Code | `claudecode/plugins/` | Claude Code teams, agents, skills, hooks, and harness docs |
+| Codex | `codex/` | Python package that orchestrates Codex CLI workers |
+
+The npm CLI in `bin/install.mjs` is the distribution wrapper: by default it installs the Claude Code layer to `~/.claude/`; with `--codex` it installs the Codex Python package.
+
 ## Usage
 
 ### Skills (slash commands)

@@ -12,10 +12,10 @@ Thank you for your interest in contributing! This guide explains how to add new 
 
 ## Adding a New Team
 
-Teams live under `plugins/<name>-team/`. The minimum required layout is:
+Teams live under `claudecode/plugins/<name>-team/`. The minimum required layout is:
 
 ```
-plugins/<name>-team/
+claudecode/plugins/<name>-team/
 ├── .claude-plugin/
 │   └── plugin.json          # plugin manifest (see below)
 ├── agents/                  # one .md file per agent
@@ -55,7 +55,7 @@ This file is the system-level instruction Claude Code receives when routing to t
 
 ## Adding a New Agent
 
-Create `plugins/<team>-team/agents/<team>-<role>.md`. The file must start with a YAML frontmatter block:
+Create `claudecode/plugins/<team>-team/agents/<team>-<role>.md`. The file must start with a YAML frontmatter block:
 
 ```markdown
 ---
@@ -83,7 +83,7 @@ Keep system prompts action-oriented. State what the agent **does**, what it **re
 
 ## Adding a New Skill
 
-Create a directory under `plugins/<team>-team/skills/<skill-name>/` and add a `SKILL.md` file:
+Create a directory under `claudecode/plugins/<team>-team/skills/<skill-name>/` and add a `SKILL.md` file:
 
 ```markdown
 ---
@@ -127,7 +127,7 @@ npm install -g .
 harnesses --help
 ```
 
-The installer copies `plugins/` into `~/.claude/`. After reinstalling, changes are live in any new Claude Code session.
+The installer copies Claude Code content from `claudecode/plugins/` into `~/.claude/`. After reinstalling, changes are live in any new Claude Code session.
 
 ---
 

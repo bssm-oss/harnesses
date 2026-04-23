@@ -68,6 +68,16 @@ Cross-cutting: Reflection Loop, Circuit Breaker, Escalation, Consensus Voting.
 
 전체 내용은 [`docs/PATTERNS.md`](docs/PATTERNS.md) 참조.
 
+## 저장소 레이어
+
+| 레이어 | 경로 | 역할 |
+|--------|------|------|
+| Core | `core/` | 공통 오케스트레이션 패턴 스펙, blackboard schema, trace schema |
+| Claude Code | `claudecode/plugins/` | Claude Code 팀, 에이전트, 스킬, 훅, 하네스 문서 |
+| Codex | `codex/` | Codex CLI worker를 오케스트레이션하는 Python 패키지 |
+
+`bin/install.mjs`의 npm CLI는 배포 래퍼입니다. 기본값은 Claude Code 레이어를 `~/.claude/`에 설치하고, `--codex`를 주면 Codex Python 패키지를 설치합니다.
+
 ## 사용법
 
 ### 스킬 (슬래시 커맨드)

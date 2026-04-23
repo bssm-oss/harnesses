@@ -7,7 +7,8 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync, spawn } from 'node:child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const PLUGINS_DIR = join(__dirname, '..', 'plugins');
+const CLAUDECODE_DIR = join(__dirname, '..', 'claudecode');
+const PLUGINS_DIR = join(CLAUDECODE_DIR, 'plugins');
 const CODEX_DIR = join(__dirname, '..', 'codex');
 const CLAUDE_HOME = join(homedir(), '.claude');
 const CLAUDE_HOME_RESOLVED = resolve(CLAUDE_HOME) + sep;

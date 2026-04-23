@@ -42,7 +42,7 @@ The following are **in scope**:
 
 - **Installer path traversal** — `bin/install.mjs` writing files outside `~/.claude/` or the project's `.claude/` directory
 - **Hook injection** — a malicious plugin embedding shell commands that execute during `PostToolUse` / `PreToolUse` / `Stop` hooks via `.claude/settings.json`
-- **Supply chain attacks** — a compromised plugin in the marketplace (`plugins/`) that exfiltrates environment variables, API keys, or file contents at install time or runtime
+- **Supply chain attacks** — a compromised plugin in the marketplace (`claudecode/plugins/`) that exfiltrates environment variables, API keys, or file contents at install time or runtime
 - **Privilege escalation** — the installer or any hook gaining permissions beyond what the user explicitly granted
 
 ## Out of Scope

@@ -63,7 +63,7 @@ When the team considers the task complete and what the final output looks like.
 
 ## Rules
 
-1. **Every team must have AGENTS.md** at the plugin root (`plugins/<team>/AGENTS.md`)
+1. **Every team must have AGENTS.md** at the plugin root (`claudecode/plugins/<team>/AGENTS.md`)
 2. **Keep it current** — update when agents or skills change
 3. **The Agents table must use the description formula** from docs/DESCRIPTION_FORMULA.md
 4. **For AI Agents section is mandatory** — this is what orchestrators read to route tasks

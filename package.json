@@ -11,7 +11,7 @@
   },
   "files": [
     "bin/",
-    "plugins/",
+    "claudecode/plugins/",
     "core/",
     "docs/",
     "examples/",

@@ -5,7 +5,7 @@ harnesses is designed to be extended. This guide walks you through creating a cu
 ## Directory Structure
 
 ```
-plugins/<your-team>/
+claudecode/plugins/<your-team>/
 ├── .claude-plugin/
 │   └── plugin.json          ← Plugin metadata
 ├── AGENTS.md                ← Team documentation (required)
@@ -108,7 +108,7 @@ Add your team to `.claude-plugin/marketplace.json`:
 ```json
 {
   "name": "your-team",
-  "source": "./plugins/your-team",
+  "source": "./claudecode/plugins/your-team",
   "description": "...",
   "version": "1.0.0",
   "keywords": ["..."],
