@@ -78,6 +78,8 @@ See [`docs/PATTERNS.md`](docs/PATTERNS.md) for full details.
 
 The npm CLI in `bin/install.mjs` is the distribution wrapper: by default it installs the Claude Code layer to `~/.claude/`; with `--codex` it installs the Codex Python package.
 
+> **Layout note:** Since `1.0.3`, Claude Code plugins live under `claudecode/plugins/` instead of the old root-level `plugins/` directory. Existing installed teams still use the same `~/.claude/` destination paths; only the repository layout changed.
+
 ## Usage
 
 ### Skills (slash commands)

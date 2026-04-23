@@ -78,6 +78,8 @@ Cross-cutting: Reflection Loop, Circuit Breaker, Escalation, Consensus Voting.
 
 `bin/install.mjs`의 npm CLI는 배포 래퍼입니다. 기본값은 Claude Code 레이어를 `~/.claude/`에 설치하고, `--codex`를 주면 Codex Python 패키지를 설치합니다.
 
+> **레이아웃 참고:** `1.0.3`부터 Claude Code 플러그인은 기존 루트 `plugins/`가 아니라 `claudecode/plugins/` 아래에 있습니다. 이미 설치된 팀의 `~/.claude/` 대상 경로는 그대로이며, 저장소 내부 구조만 바뀌었습니다.
+
 ## 사용법
 
 ### 스킬 (슬래시 커맨드)
