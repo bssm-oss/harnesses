@@ -1,15 +1,19 @@
 import tomllib
 from dataclasses import dataclass
+from importlib.resources import files
 from pathlib import Path
 
 from ..runner import run_worker, WorkerResult
 
-_AGENTS_DIR = Path(__file__).parent.parent.parent.parent / "agents" / "debate"
+_PACKAGE_AGENTS_DIR = files("codex_harnesses").joinpath("agents", "debate")
+_SOURCE_AGENTS_DIR = Path(__file__).resolve().parents[3] / "agents" / "debate"
 
 
 def _load_instructions(name: str) -> str:
-    path = _AGENTS_DIR / f"{name}.toml"
-    data = tomllib.loads(path.read_text())
+    path = _PACKAGE_AGENTS_DIR.joinpath(f"{name}.toml")
+    if not path.is_file():
+        path = _SOURCE_AGENTS_DIR / f"{name}.toml"
+    data = tomllib.loads(path.read_text(encoding="utf-8"))
     return data["developer_instructions"]
 
 

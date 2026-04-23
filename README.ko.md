@@ -37,7 +37,7 @@ Python 3.11+와 `uv`(권장) 또는 `pip3` 필요. 설치 후:
 codex-harnesses "PostgreSQL vs MongoDB?" --option-a PostgreSQL --option-b MongoDB
 ```
 
-Codex CLI 기반 적대적 토론 파이프라인 실행 — advocate-a → advocate-b → devil's advocate → judge. Codex 에이전트가 코드베이스 파일을 직접 읽어 증거 기반 논거를 구성합니다.
+Codex 패키지는 현재 적대적 토론 파이프라인만 제공합니다: advocate-a → advocate-b → devil's advocate → judge. Codex 에이전트가 코드베이스 파일을 직접 읽어 증거 기반 논거를 구성합니다.
 
 ## 팀 구성
 

@@ -37,7 +37,7 @@ Requires Python 3.11+ and `uv` (recommended) or `pip3`. After install:
 codex-harnesses "PostgreSQL vs MongoDB?" --option-a PostgreSQL --option-b MongoDB
 ```
 
-Runs an adversarial debate pipeline directly on Codex CLI — advocate-a → advocate-b → devil's advocate → judge. Codex agents can read your codebase files to build evidence-backed arguments.
+The Codex package currently ships the adversarial debate pipeline only: advocate-a → advocate-b → devil's advocate → judge. Codex agents can read your codebase files to build evidence-backed arguments.
 
 ## Teams
 
