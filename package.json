@@ -9,11 +9,10 @@
   "files": [
     "bin/",
     "plugins/",
-    "scripts/",
     "core/",
     "docs/",
     "examples/",
-    "codex/src/",
+    "codex/src/codex_harnesses/**/*.py",
     "codex/agents/",
     "codex/prompts/",
     "codex/pyproject.toml",
